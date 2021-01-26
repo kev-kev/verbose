@@ -10,4 +10,4 @@ export class WordDisplay extends Component {
   }
 }
 
-export default WordDisplay
+export default WordDisplay;
