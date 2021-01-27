@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
+import NewWordForm from './NewWordForm'
 
 export class Home extends Component {
   render() {
     return (
-      <div>
-        <h3>Home</h3>
+      <div className="d-flex justify-content-center">
+        <NewWordForm />
       </div>
     )
   }

@@ -1,18 +1,19 @@
 import React, { Component } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 import Home from "./Components/Home";
 import WordDisplay from "./Components/WordDisplay";
 import EditWordForm from "./Components/EditWordForm";
 import NewWordForm from "./Components/NewWordForm";
+import Navbar from "./Components/Navbar"
 
 class App extends Component {
   render() {
     return (
       <Router>
         <div className="container">
-          <h4>Verbose</h4>
+          <Navbar /> 
         </div>
         <Route path="/" exact component={Home} />
         <Route path="/:id" component={WordDisplay}/>
