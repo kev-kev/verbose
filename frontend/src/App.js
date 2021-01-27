@@ -6,23 +6,22 @@ import Home from "./Components/Home";
 import WordDisplay from "./Components/WordDisplay";
 import EditWordForm from "./Components/EditWordForm";
 import NewWordForm from "./Components/NewWordForm";
-import Navbar from "./Components/Navbar"
+import Navbar from "./Components/Navbar";
 
 class App extends Component {
   render() {
     return (
       <Router>
-        <div className="container">
-          <Navbar /> 
+        <div class="container-fluid">
+          <Navbar />
         </div>
         <Route path="/" exact component={Home} />
-        <Route path="/:id" component={WordDisplay}/>
-        <Route path="/edit/:id" component={EditWordForm}/>
+        <Route path="/:id" component={WordDisplay} />
+        <Route path="/edit/:id" component={EditWordForm} />
         <Route path="new" component={NewWordForm} />
       </Router>
-    )
+    );
   }
 }
 
-export default App
-
+export default App;

@@ -1,14 +1,14 @@
-import React, { Component } from 'react'
-import NewWordForm from './NewWordForm'
+import React, { Component } from "react";
+import NewWordForm from "./NewWordForm";
 
 export class Home extends Component {
   render() {
     return (
-      <div className="d-flex justify-content-center">
+      <div class="container d-flex justify-content-center align-items-center vh-100">
         <NewWordForm />
       </div>
-    )
+    );
   }
 }
 
-export default Home
+export default Home;
