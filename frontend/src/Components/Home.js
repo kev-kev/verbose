@@ -7,7 +7,7 @@ export class Home extends Component {
       <div class="container d-flex justify-content-center align-items-center vh-100">
         <NewWordForm />
       </div>
-    );
+    );  
   }
 }
 
