@@ -30,13 +30,13 @@ app.get("/api/index", (req, res) => {
   })();
 });
 
-app.get("/api/:word", (req, res) => {
+app.get("/api/:id", (req, res) => {
   (async () => {
     try {
-      const entryRef = db.collection("entries").doc(req.params.word);
+      const entryRef = db.collection("entries").doc(req.params.id);
       const doc = await entryRef.get();
       if (!doc.exists) {
-        return res.status(404).send(`No entry for ${req.params.word}`);
+        return res.status(404).send("Entry not found");
       }
       return res.status(200).send(doc.data());
     } catch (error) {
@@ -50,7 +50,7 @@ app.post("/api/create", (req, res) => {
   (async () => {
     const entry = req.body;
     try {
-      await db.collection("entries").doc(entry.word).set(entry);
+      await db.collection("entries").add(entry);
       return res.status(200).send(entry);
     } catch (error) {
       console.log(error);
@@ -59,17 +59,17 @@ app.post("/api/create", (req, res) => {
   })();
 });
 
-app.put("/api/:word", (req, res) => {
+app.put("/api/:id", (req, res) => {
   (async () => {
     const entry = req.body;
     try {
-      const entryRef = db.collection("entries").doc(req.params.word);
+      const entryRef = db.collection("entries").doc(req.params.id);
       const doc = await entryRef.get();
       if (!doc.exists) {
-        return res.status(404).send(`No entry for ${req.params.word}`);
+        return res.status(404).send(`No entry for ${req.params.id}`);
       }
       entryRef.update(entry);
-      return res.status(200).send('Entry successfully updated');
+      return res.status(200).send("Entry successfully updated");
     } catch (error) {
       console.log(error);
       return res.status(500).send(error);
@@ -77,11 +77,11 @@ app.put("/api/:word", (req, res) => {
   })();
 });
 
-app.delete("/api/:word", (req, res) => {
+app.delete("/api/:id", (req, res) => {
   (async () => {
     try {
-      await db.collection("entries").doc(req.params.word).delete();
-      return res.status(200).send(`Deleted entry for ${req.params.word}`);
+      await db.collection("entries").doc(req.params.id).delete();
+      return res.status(200).send(`Deleted entry for ${req.params.id}`);
     } catch (error) {
       console.log(error);
       return res.status(500).send(error);
