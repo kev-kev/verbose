@@ -1,2 +1,3 @@
 functions/node_modules/
 functions/permissions.json
+functions/.env
