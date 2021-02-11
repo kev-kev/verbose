@@ -8,32 +8,13 @@ const fetch = require("node-fetch");
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://verbose-1c690-default-rtdb.firebaseio.com",
+  databaseURL: process.env.DB_URL,
 });
+
 const db = admin.firestore();
 
 const app = express();
 app.use(cors({ origin: true }));
-
-// Dictionary API setup
-const endpoint = "entries";
-const languageCode = "en-us";
-const wordID = "example";
-const url =
-  process.env.DICT_APP_URL +
-  endpoint +
-  "/" +
-  languageCode +
-  "/" +
-  wordID.toLowerCase();
-const headers = {
-  app_id: process.env.DICT_APP_ID,
-  app_key: process.env.DICT_APP_KEY,
-};
-
-getDefinitionsFromJson = (json) => {
-  return json.results[0].lexicalEntries[0].entries[0].senses[0].definitions;
-};
 
 app.get("/api/index", (req, res) => {
   (async () => {

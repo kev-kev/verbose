@@ -5,6 +5,7 @@ export class NewWordForm extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
+    
   }
 
   render() {
