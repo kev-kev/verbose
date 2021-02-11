@@ -3,8 +3,10 @@ import AppReducer from "./AppReducer";
 
 const initialState = {
   entries: [],
+  dictionaryDefinition: "",
   isFetchingEntries: false,
   isSubmittingEntry: false,
+  isFetchingDefinition: false,
   errors: {
     submit,
     fetchDefinition,
@@ -26,7 +28,7 @@ function getDefinitionsFromJson(json){
 };
 
 const StateProvider = ({children}) => {
-  const [state, dispatch] = useReducer((AppReducer, initialState) => {
+  const [state, dispatch] = useReducer(AppReducer, initialState);
 
     function createEntry(word, userDefinition){
       dispatch({ type: "SUBMITTING_ENTRY" })
@@ -80,9 +82,6 @@ const StateProvider = ({children}) => {
           })
         })
     }
-
-
-  })
 };
 
 export { GlobalContext, StateProvider };
