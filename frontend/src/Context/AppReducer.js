@@ -43,6 +43,7 @@ export default (state, action) => {
     case "FETCHING_DEFINITION":
       return {
         ...state,
+        dictionaryDefinition: null,
         isFetchingDefinition: true,
       };
     case "FETCH_DEFINITION_SUCCESS":

@@ -12,9 +12,6 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div class="container-fluid">
-          <Navbar />
-        </div>
         <Route path="/" exact component={Home} />
         <Route path="/:id" component={WordDisplay} />
         <Route path="/edit/:id" component={EditWordForm} />
