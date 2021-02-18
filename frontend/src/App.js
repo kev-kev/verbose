@@ -6,7 +6,6 @@ import Home from "./Components/Home";
 import WordDisplay from "./Components/WordDisplay";
 import EditWordForm from "./Components/EditWordForm";
 import NewWordForm from "./Components/NewWordForm";
-import Navbar from "./Components/Navbar";
 
 class App extends Component {
   render() {

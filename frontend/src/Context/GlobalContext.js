@@ -30,7 +30,7 @@ function getDefinitionsFromJson(json) {
 const StateProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AppReducer, initialState);
 
-  function createEntry(word, userDefinition) {
+  function createEntry(word, userDefinition, dictDefinition) {
     dispatch({ type: "SUBMITTING_ENTRY" });
     fetch(process.env.DB_URL + "/api/create", {
       method: "POST",
@@ -39,9 +39,9 @@ const StateProvider = ({ children }) => {
       },
       body: JSON.stringify({
         word: {
-          word: word,
-          dictDefinition: getDictionaryDefinition(word),
-          userDefinition: userDefinition,
+          word,
+          dictDefinition,
+          userDefinition
         },
       }),
     })

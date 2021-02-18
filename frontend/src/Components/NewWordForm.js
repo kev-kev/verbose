@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect, useRef } from "react";
 import { GlobalContext } from "../Context/GlobalContext";
+import { Button, Form, Modal } from 'react-bootstrap';
 
 const NewWordForm = () => {
   const {
@@ -10,28 +11,52 @@ const NewWordForm = () => {
     clearErrors,
   } = useContext(GlobalContext);
 
-  const handleSubmit = (e) => {
+  const [word, setWord] = useState("");
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = (e) => {
+    // make dictionary api call and add to state
     e.preventDefault()
-    console.log("submitted");
-  };
+    
+    if (!word) {
+      // handle error
+      console.log("No word entered!")
+    } else {
+      setShow(true)
+      console.log(word)
+    };
+  }
+
+  function EntryModal() {
+    return(
+      <Modal show={show} onHide={handleClose} centered>
+        <Modal.Header closeButton>
+          <Modal.Title>{word}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>dictionary definition here</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleClose}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    )
+  }
 
   return (
-    <div className="container w-50">
-      <form className="row align-items-center" onSubmit={handleSubmit}>
-        <label className="sr-only" for="wordInput">
-          Enter a Word
-        </label>
-        <input
-          type="text"
-          className="form-control mb-2 mr-2 col"
-          id="wordInput"
-          placeholder="Enter a Word"
-        />
-        <button type="submit col" className="btn btn-primary mb-2">
+    <>
+      <Form id="newWordForm" inline>
+        <Form.Control type="text" placeholder="Enter a word" className="mr-2" onChange={(e) => setWord(e.target.value)}/>
+        <Button variant="primary" type="submit" onClick={handleShow}>
           Submit
-        </button>
-      </form>
-    </div>
+        </Button>
+      </Form>
+      <EntryModal />
+    </>
   );
 };
 
