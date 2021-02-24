@@ -62,7 +62,7 @@ export default (state, action) => {
         ...state,
         errors: {
           ...state.errors,
-          fetchDefinition: action.payload,
+          fetchDefinitions: action.payload,
         },
         isFetchingDefinitions: false,
       };
@@ -70,19 +70,6 @@ export default (state, action) => {
       return {
         ...state,
         dictionaryDefinitions: null,
-      };
-    case "STATUS_UPDATE_SUCCESS":
-      return {
-        ...state,
-        entries: action.payload,
-      };
-    case "STATUS_UPDATE_FAILURE":
-      return {
-        ...state,
-        errors: {
-          ...state.errors,
-          entryIndex: action.payload,
-        },
       };
     case "STARRED_UPDATE_SUCCESS":
       return {
@@ -120,7 +107,7 @@ export default (state, action) => {
       return {
         ...state,
         errors: {
-          fetchDefinition: null,
+          fetchDefinitions: null,
           submit: null,
           entryIndex: null,
         },

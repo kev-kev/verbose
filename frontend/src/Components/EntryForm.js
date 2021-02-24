@@ -8,7 +8,6 @@ const EntryForm = () => {
     dictionaryDefinitions,
     currentWord,
     clearCurrentWord,
-    errors,
   } = useContext(GlobalContext);
 
   const [userDefinition, setUserDefinition] = useState("");
@@ -20,11 +19,6 @@ const EntryForm = () => {
       userDefinition,
       dictionaryDefinitions[0].definition
     );
-    if (errors.submit) {
-      console.log(errors.submit);
-    } else {
-      console.log("Submitted!");
-    }
   };
 
   const handleBack = (e) => {

@@ -12,7 +12,7 @@ const initialState = {
   dictionaryDefinitions: [],
   errors: {
     submit: null,
-    fetchDefinition: null,
+    fetchDefinitions: null,
     entryIndex: null,
   },
 };
@@ -53,7 +53,13 @@ const GlobalProvider = ({ children }) => {
         dispatch({
           type: "CLEAR_DEFINITIONS",
         });
-      });
+      })
+      .catch((error) => {
+        console.log("uwu something went wrong!", error);
+        dispatch({
+
+        })
+      })
   }
 
   function getDictionaryDefinitions(word) {

@@ -14,19 +14,19 @@ const Home = () => {
     clearErrors,
   } = useContext(GlobalContext);
 
-  // const [show, setShow] = useState(false);
-  // useEffect(() => {
-  //   if (errors) {
-  //     return (
-  //       <Alert show={show} variant="danger">
-  //         <p>Something went wrong! Please try again in a few minutes.</p>
-  //       </Alert>
-  //     );
-  //   }
-  // }, [errors]);
+  const [show, setShow] = useState(false);
+  useEffect(() => {
+    if (errors.submit || errors.fetchDefinitions || errors.entryIndex) {
+      setShow(true);
+      // return (
+      //   <Alert variant="danger" onClose={() => clearErrors()} dismissible>
+      //     <p>Something went wrong! Please try again in a few minutes.</p>
+      //   </Alert>
+      // );
+    }
+  }, [errors]);
 
   const renderSpinner = () => {
-    console.log("spinning....");
     return (
       <Spinner animation="border" role="status">
         <span className="sr-only">Loading...</span>
@@ -42,6 +42,11 @@ const Home = () => {
     }
   };
 
+  const handleClose = () => {
+    setShow(false);
+    clearErrors();
+  };
+
   return (
     <div className="d-flex flex-column min-vh-100 justify-content-center align-items-center">
       <img src={Logo} width="100px" height="auto" />
@@ -49,6 +54,9 @@ const Home = () => {
       {isFetchingDefinitions || isSubmittingEntry
         ? renderSpinner()
         : renderForm()}
+      <Alert className="mt-3" variant="danger" show={show} onClose={handleClose} dismissible>
+        <p>Something went wrong! Please try again in a few minutes.</p>
+      </Alert>
     </div>
   );
 };

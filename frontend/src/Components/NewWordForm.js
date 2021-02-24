@@ -3,29 +3,14 @@ import { GlobalContext } from "../Context/GlobalContext";
 import { Button, Form } from "react-bootstrap";
 
 const NewWordForm = () => {
-  const {
-    dictionaryDefinitions,
-    getDictionaryDefinitions,
-    currentWord,
-  } = useContext(GlobalContext);
+  const { getDictionaryDefinitions } = useContext(GlobalContext);
 
   const [word, setWord] = useState("");
-  const [dictDefinitions, setDictDefinitions] = useState([]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     getDictionaryDefinitions(word);
   };
-
-  useEffect(() => {
-    setDictDefinitions(dictionaryDefinitions);
-  }, [dictionaryDefinitions]);
-
-  useEffect(() => {
-    if (currentWord) {
-      console.log(currentWord);
-    }
-  }, [currentWord]);
 
   return (
     <Form id="newWordForm" inline>
