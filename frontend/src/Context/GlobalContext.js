@@ -1,12 +1,15 @@
 import React, { createContext, useReducer } from "react";
 import AppReducer from "./AppReducer";
+import Owlbot from "owlbot-js";
 
 const initialState = {
   entries: [],
-  dictionaryDefinition: null,
+  currentWord: null,
+  userDefinition: null,
   isFetchingEntries: false,
   isSubmittingEntry: false,
-  isFetchingDefinition: false,
+  isFetchingDefinitions: false,
+  dictionaryDefinitions: [],
   errors: {
     submit: null,
     fetchDefinition: null,
@@ -23,16 +26,13 @@ function handleErrors(response) {
   return response;
 }
 
-function getDefinitionsFromJson(json) {
-  return json.results[0].lexicalEntries[0].entries[0].senses[0].definitions;
-}
-
-const StateProvider = ({ children }) => {
+const GlobalProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AppReducer, initialState);
 
-  function createEntry(word, userDefinition, dictDefinition) {
+  function createEntry(word, newDefinition, dictDefinition) {
     dispatch({ type: "SUBMITTING_ENTRY" });
-    fetch(process.env.DB_URL + "/api/create", {
+    // add .json to the end of the url if using firebase db
+    fetch(process.env.REACT_APP_DB_URL + "/api/create", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -41,7 +41,7 @@ const StateProvider = ({ children }) => {
         word: {
           word,
           dictDefinition,
-          userDefinition
+          newDefinition,
         },
       }),
     })
@@ -52,61 +52,67 @@ const StateProvider = ({ children }) => {
           type: "SUBMIT_ENTRY_SUCCESS",
           payload: json,
         });
+        dispatch({
+          type: "CLEAR_DEFINITIONS"
+        });
       });
   }
 
-  function getDictionaryDefinition(word) {
-    const endpoint = "entries";
-    const languageCode = "en-us";
-    const dictionaryUrl =
-      process.env.DICT_APP_URL +
-      endpoint +
-      "/" +
-      languageCode +
-      "/" +
-      word.toLowerCase();
-    const headers = {
-      app_id: process.env.DICT_APP_ID,
-      app_key: process.env.DICT_APP_KEY,
-    };
-    dispatch({ type: "FETCHING_DEFINITION" });
-    fetch(dictionaryUrl, {
-      headers,
-    })
-      .then(handleErrors)
-      .then((r) => r.json())
-      .then((json) => {
+  function getDictionaryDefinitions(word) {
+    dispatch({ type: "FETCHING_DEFINITIONS" });
+    dispatch({ type: "SET_CURRENT_WORD", payload: word});
+    const dictionary = Owlbot(process.env.REACT_APP_OWLBOT_API_KEY);
+    dictionary
+      .define(word)
+      .then((response) => {
+        console.log(response);
+        console.log("success");
         dispatch({
-          type: "FETCH_DEFINITION_SUCCESS",
-          payload: getDefinitionsFromJson(json),
+          type: "FETCH_DEFINITIONS_SUCCESS",
+          payload: response.definitions,
         });
       })
       .catch((error) => {
+        console.log("uwu something went wrong!", error);
         dispatch({
-          type: "FETCH_DEFINITION_FAILURE",
+          type: "FETCH_DEFINITIONS_FAILURE",
           payload: error,
         });
       });
   }
 
-  function clearErrors() {
+  function clearCurrentWord() {
     dispatch({
-      type: "CLEAR_ERRORS"
-    })
+      type: "CLEAR_CURRENT_WORD"
+    });
   }
 
-  return (<GlobalContext.Provider value={{
-    entries: state.entries,
-    isFetchingEntries: state.isFetchingEntries,
-    isSubmittingEntry: state.isSubmittingEntry,
-    isFetchingDefinition: state.isFetchingDefinition,
-    errors: state.errors,
-    createEntry,
-    clearErrors
-  }}>
-     {children}
+  function clearErrors() {
+    dispatch({
+      type: "CLEAR_ERRORS",
+    });
+  }
+
+  return (
+    <GlobalContext.Provider
+      value={{
+        entries: state.entries,
+        dictionaryDefinitions: state.dictionaryDefinitions,
+        isFetchingEntries: state.isFetchingEntries,
+        isSubmittingEntry: state.isSubmittingEntry,
+        isFetchingDefinitions: state.isFetchingDefinitions,
+        errors: state.errors,
+        createEntry,
+        clearErrors,
+        getDictionaryDefinitions,
+        currentWord: state.currentWord,
+        clearCurrentWord,
+        userDefinition: state.userDefinition
+      }}
+    >
+      {children}
     </GlobalContext.Provider>
-  )
+  );
 };
 
-export { GlobalContext, StateProvider };
+export { GlobalContext, GlobalProvider };

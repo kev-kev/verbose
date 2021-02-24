@@ -40,26 +40,36 @@ export default (state, action) => {
         },
         isFetchingEntries: false,
       };
-    case "FETCHING_DEFINITION":
+    case "SET_CURRENT_WORD":
       return {
         ...state,
-        dictionaryDefinition: null,
-        isFetchingDefinition: true,
+        currentWord: action.payload,
       };
-    case "FETCH_DEFINITION_SUCCESS":
+    case "FETCHING_DEFINITIONS":
       return {
         ...state,
-        dictionaryDefinition: action.payload,
-        isFetchingDefinition: false,
+        dictionaryDefinitions: null,
+        isFetchingDefinitions: true,
       };
-    case "FETCH_DEFINITION_FAILURE":
+    case "FETCH_DEFINITIONS_SUCCESS":
+      return {
+        ...state,
+        dictionaryDefinitions: action.payload,
+        isFetchingDefinitions: false,
+      };
+    case "FETCH_DEFINITIONS_FAILURE":
       return {
         ...state,
         errors: {
           ...state.errors,
           fetchDefinition: action.payload,
         },
-        isFetchingDefinition: false,
+        isFetchingDefinitions: false,
+      };
+    case "CLEAR_DEFINITIONS":
+      return {
+        ...state,
+        dictionaryDefinitions: null
       };
     case "STATUS_UPDATE_SUCCESS":
       return {
@@ -99,6 +109,12 @@ export default (state, action) => {
           ...state.errors,
           entryIndex: action.payload,
         },
+      };
+    case "CLEAR_CURRENT_WORD":
+      return {
+        ...state,
+        dictionaryDefinitions: [],
+        currentWord: null
       };
     case "CLEAR_ERRORS":
       return {

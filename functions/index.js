@@ -4,11 +4,10 @@ const admin = require("firebase-admin");
 const express = require("express");
 const cors = require("cors");
 const serviceAccount = require("./permissions.json");
-const fetch = require("node-fetch");
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  databaseURL: process.env.DB_URL,
+  databaseURL: process.env.REACT_APP_DB_URL,
 });
 
 const db = admin.firestore();
@@ -50,23 +49,16 @@ app.get("/api/:id", (req, res) => {
 });
 
 app.post("/api/create", (req, res) => {
-  fetch(url, {
-    headers: headers,
-  })
-    .then((r) => r.json())
-    .then((json) => {
-      (async () => {
-        const entry = req.body;
-        entry.dictionaryDefinitions = getDefinitionsFromJson(json);
-        try {
-          await db.collection("entries").add(entry);
-          return res.status(200).send(entry);
-        } catch (error) {
-          console.log(error);
-          return res.status(500).send(error);
-        }
-      })();
-    });
+  (async () => {
+    const entry = req.body;
+    try {
+      await db.collection("entries").add(entry);
+      return res.status(200).send(entry);
+    } catch (error) {
+      console.log(error);
+      return res.status(500).send(error);
+    }
+  })();
 });
 
 app.put("/api/:id", (req, res) => {
