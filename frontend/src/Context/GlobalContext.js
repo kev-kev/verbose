@@ -31,7 +31,7 @@ const GlobalProvider = ({ children }) => {
 
   function createEntry(word, newDefinition, dictDefinition) {
     dispatch({ type: "SUBMITTING_ENTRY" });
-    // add .json to the end of the url if using firebase db
+    // add .json to the end of the url if using realtime db rather than firestore4
     fetch(process.env.REACT_APP_DB_URL + "/api/create", {
       method: "POST",
       headers: {
@@ -51,14 +51,14 @@ const GlobalProvider = ({ children }) => {
           payload: json,
         });
         dispatch({
-          type: "CLEAR_DEFINITIONS"
+          type: "CLEAR_DEFINITIONS",
         });
       });
   }
 
   function getDictionaryDefinitions(word) {
     dispatch({ type: "FETCHING_DEFINITIONS" });
-    dispatch({ type: "SET_CURRENT_WORD", payload: word});
+    dispatch({ type: "SET_CURRENT_WORD", payload: word });
     const dictionary = Owlbot(process.env.REACT_APP_OWLBOT_API_KEY);
     dictionary
       .define(word)
@@ -81,7 +81,7 @@ const GlobalProvider = ({ children }) => {
 
   function clearCurrentWord() {
     dispatch({
-      type: "CLEAR_CURRENT_WORD"
+      type: "CLEAR_CURRENT_WORD",
     });
   }
 
@@ -105,7 +105,7 @@ const GlobalProvider = ({ children }) => {
         getDictionaryDefinitions,
         currentWord: state.currentWord,
         clearCurrentWord,
-        userDefinition: state.userDefinition
+        userDefinition: state.userDefinition,
       }}
     >
       {children}

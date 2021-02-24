@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { GlobalProvider } from './Context/GlobalContext';
+import { GlobalProvider } from "./Context/GlobalContext";
 
 import Home from "./Components/Home";
 import WordDisplay from "./Components/WordDisplay";
@@ -19,7 +19,6 @@ class App extends Component {
           <Route path="/new" component={NewWordForm} />
         </Router>
       </GlobalProvider>
-      
     );
   }
 }

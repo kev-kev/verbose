@@ -14,7 +14,7 @@ const NewWordForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    getDictionaryDefinitions(word)
+    getDictionaryDefinitions(word);
   };
 
   useEffect(() => {
@@ -22,10 +22,10 @@ const NewWordForm = () => {
   }, [dictionaryDefinitions]);
 
   useEffect(() => {
-    if(currentWord){
-      console.log(currentWord)
+    if (currentWord) {
+      console.log(currentWord);
     }
-  }, [currentWord])
+  }, [currentWord]);
 
   return (
     <Form id="newWordForm" inline>

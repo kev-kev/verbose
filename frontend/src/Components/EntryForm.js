@@ -1,6 +1,6 @@
-import React, { useContext, useState, useEffect, useRef } from "react";
+import React, { useContext, useState } from "react";
 import { GlobalContext } from "../Context/GlobalContext";
-import { Button, Form, Modal, Spinner } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 
 const EntryForm = () => {
   const {
@@ -8,17 +8,21 @@ const EntryForm = () => {
     dictionaryDefinitions,
     currentWord,
     clearCurrentWord,
-    errors
+    errors,
   } = useContext(GlobalContext);
 
   const [userDefinition, setUserDefinition] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    createEntry(currentWord, userDefinition, dictionaryDefinitions[0].definition)
-    if(errors.submit){
-      console.log(errors.submit)
-    } else{
+    createEntry(
+      currentWord,
+      userDefinition,
+      dictionaryDefinitions[0].definition
+    );
+    if (errors.submit) {
+      console.log(errors.submit);
+    } else {
       console.log("Submitted!");
     }
   };
@@ -41,7 +45,7 @@ const EntryForm = () => {
         as="textarea"
         rows="2"
         placeholder="write the above in your own words"
-        onChange={e => setUserDefinition(e.target.value)}
+        onChange={(e) => setUserDefinition(e.target.value)}
       />
       <Button variant="secondary" onClick={handleBack} className="mr-2">
         Back

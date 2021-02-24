@@ -69,7 +69,7 @@ export default (state, action) => {
     case "CLEAR_DEFINITIONS":
       return {
         ...state,
-        dictionaryDefinitions: null
+        dictionaryDefinitions: null,
       };
     case "STATUS_UPDATE_SUCCESS":
       return {
@@ -114,7 +114,7 @@ export default (state, action) => {
       return {
         ...state,
         dictionaryDefinitions: [],
-        currentWord: null
+        currentWord: null,
       };
     case "CLEAR_ERRORS":
       return {
