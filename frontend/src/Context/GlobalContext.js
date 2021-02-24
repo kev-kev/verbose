@@ -38,11 +38,9 @@ const GlobalProvider = ({ children }) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        word: {
-          word,
-          dictDefinition,
-          newDefinition,
-        },
+        word,
+        dictDefinition,
+        newDefinition,
       }),
     })
       .then(handleErrors)
