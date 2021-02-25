@@ -20,7 +20,7 @@ export default (state, action) => {
         },
         isSubmittingEntry: false,
       };
-    case "FETCH_ENTRIES":
+    case "FETCHING_ENTRIES":
       return {
         ...state,
         isFetchingEntries: true,

@@ -29,6 +29,26 @@ function handleErrors(response) {
 const GlobalProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AppReducer, initialState);
 
+  function getEntries() {
+    dispatch({ type: "FETCHING_ENTRIES" });
+    fetch(process.env.REACT_APP_DB_URL + "/api/index")
+      .then(handleErrors)
+      .then((r) => r.json())
+      .then((data) => {
+        dispatch({
+          type: "FETCH_ENTRIES_SUCCESS",
+          payload: data,
+        });
+      })
+      .catch((error) => {
+        console.log("uwu something went wrong!");
+        dispatch({
+          type: "FETCH_ENTRIES_FAILURE",
+          payload: error,
+        });
+      });
+  }
+
   function createEntry(word, newDefinition, dictDefinition) {
     dispatch({ type: "SUBMITTING_ENTRY" });
     // add .json to the end of the url if using realtime db rather than firestore4
@@ -45,10 +65,10 @@ const GlobalProvider = ({ children }) => {
     })
       .then(handleErrors)
       .then((r) => r.json())
-      .then((json) => {
+      .then((data) => {
         dispatch({
           type: "SUBMIT_ENTRY_SUCCESS",
-          payload: json,
+          payload: data,
         });
         dispatch({
           type: "CLEAR_DEFINITIONS",
@@ -57,9 +77,10 @@ const GlobalProvider = ({ children }) => {
       .catch((error) => {
         console.log("uwu something went wrong!", error);
         dispatch({
-
-        })
-      })
+          type: "SUBMIT_ENTRY_FAILURE",
+          payload: error,
+        });
+      });
   }
 
   function getDictionaryDefinitions(word) {
@@ -68,12 +89,12 @@ const GlobalProvider = ({ children }) => {
     const dictionary = Owlbot(process.env.REACT_APP_OWLBOT_API_KEY);
     dictionary
       .define(word)
-      .then((response) => {
-        console.log(response);
+      .then((data) => {
+        console.log(data);
         console.log("success");
         dispatch({
           type: "FETCH_DEFINITIONS_SUCCESS",
-          payload: response.definitions,
+          payload: data.definitions,
         });
       })
       .catch((error) => {
@@ -112,6 +133,7 @@ const GlobalProvider = ({ children }) => {
         currentWord: state.currentWord,
         clearCurrentWord,
         userDefinition: state.userDefinition,
+        getEntries,
       }}
     >
       {children}

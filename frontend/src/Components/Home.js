@@ -1,8 +1,9 @@
 import NewWordForm from "./NewWordForm";
 import EntryForm from "./EntryForm";
+import EntryIndex from "./EntryIndex";
 import Logo from "../Assets/logo.png";
 import { GlobalContext } from "../Context/GlobalContext";
-import React, { useContext, useState, useEffect, useRef } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Spinner, Alert } from "react-bootstrap";
 
 const Home = () => {
@@ -12,19 +13,17 @@ const Home = () => {
     isFetchingDefinitions,
     errors,
     clearErrors,
+    getEntries,
   } = useContext(GlobalContext);
 
   const [show, setShow] = useState(false);
   useEffect(() => {
     if (errors.submit || errors.fetchDefinitions || errors.entryIndex) {
       setShow(true);
-      // return (
-      //   <Alert variant="danger" onClose={() => clearErrors()} dismissible>
-      //     <p>Something went wrong! Please try again in a few minutes.</p>
-      //   </Alert>
-      // );
     }
   }, [errors]);
+
+  useEffect(getEntries, []);
 
   const renderSpinner = () => {
     return (
@@ -54,7 +53,14 @@ const Home = () => {
       {isFetchingDefinitions || isSubmittingEntry
         ? renderSpinner()
         : renderForm()}
-      <Alert className="mt-3" variant="danger" show={show} onClose={handleClose} dismissible>
+      <EntryIndex />
+      <Alert
+        className="mt-3"
+        variant="danger"
+        show={show}
+        onClose={handleClose}
+        dismissible
+      >
         <p>Something went wrong! Please try again in a few minutes.</p>
       </Alert>
     </div>
