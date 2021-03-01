@@ -1,18 +1,33 @@
 import React, { useContext } from "react";
 import { GlobalContext } from "../Context/GlobalContext";
-import { ListGroup } from "react-bootstrap";
+import { Accordion, Card } from "react-bootstrap";
 
 const EntryIndex = () => {
   const { entries } = useContext(GlobalContext);
 
+  const renderEntryCards = (entries) => {
+    if (entries) {
+      let i = 0;
+      return entries.map((entry) => {
+        i++;
+        return (
+          <Card key={i}>
+            <Accordion.Toggle as={Card.Header} eventKey={i}>
+              {entry.word} - {entry.newDefinition}
+            </Accordion.Toggle>
+            <Accordion.Collapse eventKey={i}>
+              <Card.Body>{entry.dictDefinition}</Card.Body>
+            </Accordion.Collapse>
+          </Card>
+        );
+      });
+    }
+  };
+
   return (
-    <ListGroup variant="flush" className="mt-3">
-      {console.log(entries)}
-      <ListGroup.Item>Cras justo odio</ListGroup.Item>
-      <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
-      <ListGroup.Item>Morbi leo risus</ListGroup.Item>
-      <ListGroup.Item>Porta ac consectetur ac</ListGroup.Item>
-    </ListGroup>
+    <Accordion className="mx-3" style={{ width: 500 }}>
+      {renderEntryCards(entries)}
+    </Accordion>
   );
 };
 

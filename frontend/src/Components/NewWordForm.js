@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect, useRef } from "react";
+import React, { useContext, useState, } from "react";
 import { GlobalContext } from "../Context/GlobalContext";
 import { Button, Form } from "react-bootstrap";
 
@@ -13,7 +13,7 @@ const NewWordForm = () => {
   };
 
   return (
-    <Form id="newWordForm" inline>
+    <Form id="newWordForm" inline className="mb-4">
       <Form.Control
         type="text"
         placeholder="Enter a word"

@@ -48,8 +48,8 @@ const Home = () => {
 
   return (
     <div className="d-flex flex-column min-vh-100 justify-content-center align-items-center">
-      <img src={Logo} width="100px" height="auto" />
-      <h3>verbose</h3> <br />
+      <img src={Logo} width="75px" height="auto" />
+      <h3 className="mb-3">verbose</h3>
       {isFetchingDefinitions || isSubmittingEntry
         ? renderSpinner()
         : renderForm()}
