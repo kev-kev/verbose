@@ -15,7 +15,7 @@ const db = admin.firestore();
 const app = express();
 app.use(cors({ origin: true }));
 
-app.get("/api/index", (req, res) => {
+function getIndex(res) {
   (async () => {
     try {
       const response = [];
@@ -30,6 +30,10 @@ app.get("/api/index", (req, res) => {
       return res.status(500).send(error);
     }
   })();
+}
+
+app.get("/api/index", (req, res) => {
+  getIndex(res);
 });
 
 app.get("/api/:id", (req, res) => {
@@ -40,7 +44,7 @@ app.get("/api/:id", (req, res) => {
       if (!doc.exists) {
         return res.status(404).send("Entry not found");
       }
-      return res.status(200).send(doc.data());
+      getIndex(res);
     } catch (error) {
       console.log(error);
       return res.status(500).send(error);
@@ -52,8 +56,8 @@ app.post("/api/create", (req, res) => {
   (async () => {
     const entry = req.body;
     try {
-      await db.collection("entries").add(entry);
-      return res.status(200).send(entry);
+      await db.collection("entries").doc(entry.word).set(entry);
+      getIndex(res);
     } catch (error) {
       console.log(error);
       return res.status(500).send(error);
@@ -71,7 +75,7 @@ app.put("/api/:id", (req, res) => {
         return res.status(404).send(`No entry for ${req.params.id}`);
       }
       entryRef.update(entry);
-      return res.status(200).send("Entry successfully updated");
+      getIndex(res);
     } catch (error) {
       console.log(error);
       return res.status(500).send(error);
@@ -83,7 +87,7 @@ app.delete("/api/:id", (req, res) => {
   (async () => {
     try {
       await db.collection("entries").doc(req.params.id).delete();
-      return res.status(200).send(`Deleted entry for ${req.params.id}`);
+      getIndex(res);
     } catch (error) {
       console.log(error);
       return res.status(500).send(error);

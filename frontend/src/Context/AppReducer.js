@@ -97,6 +97,14 @@ export default (state, action) => {
           entryIndex: action.payload,
         },
       };
+    case "ADD_WORD_FAILURE":
+      return {
+        ...state,
+        errors: {
+          ...state.errors,
+          addWord: `${action.payload} has already been added.`,
+        },
+      };
     case "CLEAR_CURRENT_WORD":
       return {
         ...state,

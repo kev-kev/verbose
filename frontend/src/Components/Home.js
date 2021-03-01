@@ -18,7 +18,7 @@ const Home = () => {
 
   const [show, setShow] = useState(false);
   useEffect(() => {
-    if (errors.submit || errors.fetchDefinitions || errors.entryIndex) {
+    if (errors.submit || errors.fetchDefinitions || errors.entryIndex || errors.addWord) {
       setShow(true);
     }
   }, [errors]);
@@ -47,13 +47,7 @@ const Home = () => {
   };
 
   return (
-    <div className="d-flex flex-column min-vh-100 justify-content-center align-items-center">
-      <img src={Logo} width="75px" height="auto" />
-      <h3 className="mb-3">verbose</h3>
-      {isFetchingDefinitions || isSubmittingEntry
-        ? renderSpinner()
-        : renderForm()}
-      <EntryIndex />
+    <div className="d-flex flex-column min-vh-100 align-items-center">
       <Alert
         className="mt-3"
         variant="danger"
@@ -61,8 +55,14 @@ const Home = () => {
         onClose={handleClose}
         dismissible
       >
-        <p>Something went wrong! Please try again in a few minutes.</p>
+        <p>Something went wrong!</p>
       </Alert>
+      <img style={{marginTop: "20%"}} src={Logo} width="75px" height="auto"/>
+      <h3 className="mb-3">verbose</h3>
+      {isFetchingDefinitions || isSubmittingEntry
+        ? renderSpinner()
+        : renderForm()}
+      <EntryIndex />
     </div>
   );
 };

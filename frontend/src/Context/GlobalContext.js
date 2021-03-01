@@ -14,6 +14,7 @@ const initialState = {
     submit: null,
     fetchDefinitions: null,
     entryIndex: null,
+    addWord: null,
   },
 };
 
@@ -83,6 +84,12 @@ const GlobalProvider = ({ children }) => {
       });
   }
 
+  function deleteEntry(id) {
+    fetch(process.env.REACT_APP_DB_URL + `/api/${id}`, {
+      method: "DELETE",
+    });
+  }
+
   function getDictionaryDefinitions(word) {
     dispatch({ type: "FETCHING_DEFINITIONS" });
     dispatch({ type: "SET_CURRENT_WORD", payload: word });
@@ -90,7 +97,6 @@ const GlobalProvider = ({ children }) => {
     dictionary
       .define(word)
       .then((data) => {
-        console.log(data);
         console.log("success");
         dispatch({
           type: "FETCH_DEFINITIONS_SUCCESS",
@@ -109,6 +115,13 @@ const GlobalProvider = ({ children }) => {
   function clearCurrentWord() {
     dispatch({
       type: "CLEAR_CURRENT_WORD",
+    });
+  }
+
+  function addWordFailure(word) {
+    dispatch({
+      type: "ADD_WORD_FAILURE",
+      payload: word,
     });
   }
 
@@ -134,6 +147,7 @@ const GlobalProvider = ({ children }) => {
         clearCurrentWord,
         userDefinition: state.userDefinition,
         getEntries,
+        addWordFailure
       }}
     >
       {children}

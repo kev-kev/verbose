@@ -8,7 +8,7 @@ const EntryIndex = () => {
   const renderEntryCards = (entries) => {
     if (entries) {
       let i = 0;
-      return entries.map((entry) => {
+      return (entries.map((entry) => {
         i++;
         return (
           <Card key={i}>
@@ -20,7 +20,7 @@ const EntryIndex = () => {
             </Accordion.Collapse>
           </Card>
         );
-      });
+      }));
     }
   };
 
