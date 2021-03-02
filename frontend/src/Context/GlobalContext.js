@@ -147,7 +147,8 @@ const GlobalProvider = ({ children }) => {
         clearCurrentWord,
         userDefinition: state.userDefinition,
         getEntries,
-        addWordFailure
+        addWordFailure,
+        deleteEntry
       }}
     >
       {children}
