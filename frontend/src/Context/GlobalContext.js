@@ -50,6 +50,21 @@ const GlobalProvider = ({ children }) => {
       });
   }
 
+  function getEntriesOffline() {
+    dispatch({
+      type: "GET_ENTRIES_OFFLINE", 
+      payload: 
+      [
+        {word: "testword1", dictDefinition: "test dictionary definition1", newDefinition: "test user definition1"},
+        {word: "testword2", dictDefinition: "test dictionary definition2", newDefinition: "test user definition2"},
+        {word: "testword3", dictDefinition: "test dictionary definition3", newDefinition: "test user definition3"},
+        {word: "testword4", dictDefinition: "test dictionary definition4", newDefinition: "test user definition4"},
+        {word: "testword5", dictDefinition: "test dictionary definition5", newDefinition: "test user definition5"},
+        {word: "testword6", dictDefinition: "test dictionary definition6", newDefinition: "test user definition6"},
+      ]
+    });
+  }
+
   function createEntry(word, newDefinition, dictDefinition) {
     dispatch({ type: "SUBMITTING_ENTRY" });
     // add .json to the end of the url if using realtime db rather than firestore4
@@ -84,10 +99,25 @@ const GlobalProvider = ({ children }) => {
       });
   }
 
-  function deleteEntry(id) {
-    fetch(process.env.REACT_APP_DB_URL + `/api/${id}`, {
+  function deleteEntry(word) {
+    fetch(process.env.REACT_APP_DB_URL + `/api/${word}`, {
       method: "DELETE",
-    });
+    })
+      .then(handleErrors)
+      .then((r) => r.json())
+      .then((data) => {
+        dispatch({
+          type: "DELETE_ENTRY_SUCCESS",
+          payload: data,
+        });
+      })
+      .catch((error) => {
+        console.log("uwu something went wrong!", error);
+        dispatch({
+          type: "DELETE_ENTRY_FAILURE",
+          payload: error,
+        });
+      });
   }
 
   function getDictionaryDefinitions(word) {
@@ -147,8 +177,9 @@ const GlobalProvider = ({ children }) => {
         clearCurrentWord,
         userDefinition: state.userDefinition,
         getEntries,
+        getEntriesOffline,
         addWordFailure,
-        deleteEntry
+        deleteEntry,
       }}
     >
       {children}

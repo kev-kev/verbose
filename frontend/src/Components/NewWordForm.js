@@ -1,24 +1,26 @@
-import React, { useContext, useState, } from "react";
+import React, { useContext, useState } from "react";
 import { GlobalContext } from "../Context/GlobalContext";
 import { Button, Form } from "react-bootstrap";
 
 const NewWordForm = () => {
-  const { getDictionaryDefinitions, entries, addWordFailure } = useContext(GlobalContext);
+  const { getDictionaryDefinitions, entries, addWordFailure } = useContext(
+    GlobalContext
+  );
 
   const [word, setWord] = useState("");
 
   const handleSubmit = (e) => {
     let i = false;
     e.preventDefault();
-    entries.map(entry => {
-      if (entry.word == word){
+    entries.map((entry) => {
+      if (entry.word === word) {
         i = true;
       }
-    })
-    if (i == true){
-      addWordFailure(word)
+    });
+    if (i === true) {
+      return (addWordFailure(word))
     } else {
-      getDictionaryDefinitions(word);
+      return (getDictionaryDefinitions(word))
     }
   };
 

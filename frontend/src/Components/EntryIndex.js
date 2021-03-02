@@ -3,11 +3,15 @@ import { GlobalContext } from "../Context/GlobalContext";
 import { Accordion, Card, Button, Modal } from "react-bootstrap";
 
 const EntryIndex = () => {
-  const { entries } = useContext(GlobalContext);
+  const { entries, deleteEntry } = useContext(GlobalContext);
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleShowEditForm = () => setShow(true);
+
+  const handleDelete = (word) => {
+    deleteEntry(word)
+  }
 
   const renderEntryCards = (entries) => {
     if (entries) {
@@ -15,16 +19,19 @@ const EntryIndex = () => {
       return entries.map((entry) => {
         i++;
         return (
-          <Card key={i}>
-            <Accordion.Toggle as={Card.Header} eventKey={i}>
+          <Card key={i} >
+            <Accordion.Toggle as={Card.Header} eventKey={i} className="d-flex justify-content-space-between">
               {entry.word} - {entry.newDefinition}
             </Accordion.Toggle>
             <Accordion.Collapse eventKey={i}>
               <Card.Body>
-                {entry.dictDefinition}
-                <Button onClick={handleShow} variant="primary" className="">
+                <Card.Text>
+                  {entry.dictDefinition}
+                </Card.Text>
+                <Button onClick={handleShowEditForm} variant="primary" className="mr-2" size="sm">
                   Edit
                 </Button>
+                <Button onClick={() => handleDelete(entry.word)} variant="danger" size="sm">Delete</Button>
               </Card.Body>
             </Accordion.Collapse>
           </Card>

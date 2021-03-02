@@ -120,6 +120,11 @@ export default (state, action) => {
           entryIndex: null,
         },
       };
+    case "GET_ENTRIES_OFFLINE":
+      return {
+        ...state,
+        entries: action.payload,
+      };
     default:
       return state;
   }

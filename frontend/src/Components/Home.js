@@ -14,16 +14,22 @@ const Home = () => {
     errors,
     clearErrors,
     getEntries,
+    getEntriesOffline
   } = useContext(GlobalContext);
 
   const [show, setShow] = useState(false);
   useEffect(() => {
-    if (errors.submit || errors.fetchDefinitions || errors.entryIndex || errors.addWord) {
+    if (
+      errors.submit ||
+      errors.fetchDefinitions ||
+      errors.entryIndex ||
+      errors.addWord
+    ) {
       setShow(true);
     }
   }, [errors]);
 
-  useEffect(getEntries, []);
+  useEffect(getEntriesOffline, []);
 
   const renderSpinner = () => {
     return (
@@ -57,7 +63,7 @@ const Home = () => {
       >
         <p>Something went wrong!</p>
       </Alert>
-      <img style={{marginTop: "20%"}} src={Logo} width="75px" height="auto"/>
+      <img style={{ marginTop: "20%" }} src={Logo} width="75px" height="auto" />
       <h3 className="mb-3">verbose</h3>
       {isFetchingDefinitions || isSubmittingEntry
         ? renderSpinner()
