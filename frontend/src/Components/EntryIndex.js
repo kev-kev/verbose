@@ -21,6 +21,7 @@ const EntryIndex = () => {
   const renderEntryCards = (entries) => {
     if (entries) {
       let i = 0;
+      console.log(entries)
       return entries.map((entry) => {
         i++;
         return (

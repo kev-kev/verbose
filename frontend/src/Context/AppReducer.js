@@ -71,6 +71,24 @@ export default (state, action) => {
         ...state,
         dictionaryDefinitions: null,
       };
+    case "SET_EDIT_MODAL":
+      return {
+        ...state,
+        editModalIsOpen: action.payload,
+      };
+    case "ENTRY_UPDATE_SUCCESS":
+      return {
+        ...state,
+        entries: action.payload,
+      };
+    case "ENTRY_UPDATE_FAILURE":
+    return {
+      ...state,
+      errors: {
+        ...state.errors,
+        editWord: action.payload
+      },
+    };
     case "STARRED_UPDATE_SUCCESS":
       return {
         ...state,
@@ -118,18 +136,10 @@ export default (state, action) => {
           fetchDefinitions: null,
           submit: null,
           entryIndex: null,
+          editWord: null
         },
       };
-    case "GET_ENTRIES_OFFLINE":
-      return {
-        ...state,
-        entries: action.payload,
-      };
-    case "SET_EDIT_MODAL":
-      return {
-        ...state,
-        editModalIsOpen: action.payload,
-      };
+
     default:
       return state;
   }

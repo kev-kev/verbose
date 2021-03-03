@@ -14,7 +14,6 @@ const Home = () => {
     errors,
     clearErrors,
     getEntries,
-    getEntriesOffline
   } = useContext(GlobalContext);
 
   const [show, setShow] = useState(false);
@@ -23,7 +22,8 @@ const Home = () => {
       errors.submit ||
       errors.fetchDefinitions ||
       errors.entryIndex ||
-      errors.addWord
+      errors.addWord ||
+      errors.editWord
     ) {
       setShow(true);
     }

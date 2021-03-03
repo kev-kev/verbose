@@ -65,16 +65,10 @@ app.post("/api/create", (req, res) => {
   })();
 });
 
-app.put("/api/:id", (req, res) => {
+app.put("/api/:word", (req, res) => {
   (async () => {
-    const entry = req.body;
     try {
-      const entryRef = db.collection("entries").doc(req.params.id);
-      const doc = await entryRef.get();
-      if (!doc.exists) {
-        return res.status(404).send(`No entry for ${req.params.id}`);
-      }
-      entryRef.update(entry);
+      await db.collection("entries").doc(req.params.word).set(req.body)
       getIndex(res);
     } catch (error) {
       console.log(error);
@@ -83,10 +77,10 @@ app.put("/api/:id", (req, res) => {
   })();
 });
 
-app.delete("/api/:id", (req, res) => {
+app.delete("/api/:word", (req, res) => {
   (async () => {
     try {
-      await db.collection("entries").doc(req.params.id).delete();
+      await db.collection("entries").doc(req.params.word).delete();
       getIndex(res);
     } catch (error) {
       console.log(error);
