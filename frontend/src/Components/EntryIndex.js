@@ -4,11 +4,18 @@ import { Accordion, Card, Button, Modal } from "react-bootstrap";
 import EditModal from "./EditModal";
 
 const EntryIndex = () => {
-  const { entries, deleteEntry, editModalIsOpen, setEditModal } = useContext(GlobalContext);
-  const handleShowEditForm = () => setEditModal(true);
+  const { entries, deleteEntry, editModalIsOpen, setEditModal } = useContext(
+    GlobalContext
+  );
+  const [selectedEntry, setSelectedEntry] = useState();
 
   const handleDelete = (word) => {
     deleteEntry(word);
+  };
+
+  const onEditClick = (entry) => {
+    setSelectedEntry(entry);
+    setEditModal(true)
   };
 
   const renderEntryCards = (entries) => {
@@ -29,7 +36,7 @@ const EntryIndex = () => {
               <Card.Body>
                 <Card.Text>{entry.dictDefinition}</Card.Text>
                 <Button
-                  onClick={handleShowEditForm}
+                  onClick={() => onEditClick(entry)}
                   variant="primary"
                   className="mr-2"
                   size="sm"
@@ -53,7 +60,7 @@ const EntryIndex = () => {
 
   return (
     <>
-      <EditModal show={editModalIsOpen}/>
+      <EditModal show={editModalIsOpen} entry={selectedEntry}/>
       <Accordion className="mx-3" style={{ width: 500 }}>
         {renderEntryCards(entries)}
       </Accordion>
