@@ -125,6 +125,11 @@ export default (state, action) => {
         ...state,
         entries: action.payload,
       };
+    case "SET_EDIT_MODAL":
+      return {
+        ...state,
+        editModalIsOpen: action.payload
+      }
     default:
       return state;
   }

@@ -10,6 +10,7 @@ const initialState = {
   isSubmittingEntry: false,
   isFetchingDefinitions: false,
   dictionaryDefinitions: [],
+  editModalIsOpen: false,
   errors: {
     submit: null,
     fetchDefinitions: null,
@@ -214,6 +215,13 @@ const GlobalProvider = ({ children }) => {
     });
   }
 
+  function setEditModal(bool) {
+    dispatch({
+      type: "SET_EDIT_MODAL",
+      payload: bool,
+    });
+  }
+
   return (
     <GlobalContext.Provider
       value={{
@@ -233,6 +241,8 @@ const GlobalProvider = ({ children }) => {
         getEntriesOffline,
         addWordFailure,
         deleteEntry,
+        editModalIsOpen: state.editModalIsOpen,
+        setEditModal,
       }}
     >
       {children}
