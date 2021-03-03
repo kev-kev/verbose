@@ -36,10 +36,10 @@ app.get("/api/index", (req, res) => {
   getIndex(res);
 });
 
-app.get("/api/:id", (req, res) => {
+app.get("/api/:word", (req, res) => {
   (async () => {
     try {
-      const entryRef = db.collection("entries").doc(req.params.id);
+      const entryRef = db.collection("entries").doc(req.params.word);
       const doc = await entryRef.get();
       if (!doc.exists) {
         return res.status(404).send("Entry not found");

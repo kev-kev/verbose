@@ -3,10 +3,7 @@ import { GlobalContext } from "../Context/GlobalContext";
 import { Button, Form } from "react-bootstrap";
 
 const NewWordForm = () => {
-  const { getDictionaryDefinitions, entries, addWordFailure } = useContext(
-    GlobalContext
-  );
-
+  const { getDictionaryDefinitions, entries, addWordFailure } = useContext(GlobalContext);
   const [word, setWord] = useState("");
 
   const handleSubmit = (e) => {

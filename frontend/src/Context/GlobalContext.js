@@ -52,16 +52,69 @@ const GlobalProvider = ({ children }) => {
 
   function getEntriesOffline() {
     dispatch({
-      type: "GET_ENTRIES_OFFLINE", 
-      payload: 
-      [
-        {word: "testword1", dictDefinition: "test dictionary definition1", newDefinition: "test user definition1"},
-        {word: "testword2", dictDefinition: "test dictionary definition2", newDefinition: "test user definition2"},
-        {word: "testword3", dictDefinition: "test dictionary definition3", newDefinition: "test user definition3"},
-        {word: "testword4", dictDefinition: "test dictionary definition4", newDefinition: "test user definition4"},
-        {word: "testword5", dictDefinition: "test dictionary definition5", newDefinition: "test user definition5"},
-        {word: "testword6", dictDefinition: "test dictionary definition6", newDefinition: "test user definition6"},
-      ]
+      type: "GET_ENTRIES_OFFLINE",
+      payload: [
+        {
+          word: "testword1",
+          dictDefinition: "test dictionary definition1",
+          newDefinition: "test user definition1",
+        },
+        {
+          word: "testword2",
+          dictDefinition: "test dictionary definition2",
+          newDefinition: "test user definition2",
+        },
+        {
+          word: "testword3",
+          dictDefinition: "test dictionary definition3",
+          newDefinition: "test user definition3",
+        },
+        {
+          word: "testword4",
+          dictDefinition: "test dictionary definition4",
+          newDefinition: "test user definition4",
+        },
+        {
+          word: "testword5",
+          dictDefinition: "test dictionary definition5",
+          newDefinition: "test user definition5",
+        },
+        {
+          word: "testword6",
+          dictDefinition: "test dictionary definition6",
+          newDefinition: "test user definition6",
+        },
+        {
+          word: "testword7",
+          dictDefinition: "test dictionary definition7",
+          newDefinition: "test user definition7",
+        },
+        {
+          word: "testword8",
+          dictDefinition: "test dictionary definition8",
+          newDefinition: "test user definition8",
+        },
+        {
+          word: "testword9",
+          dictDefinition: "test dictionary definition9",
+          newDefinition: "test user definition9",
+        },
+        {
+          word: "testword10",
+          dictDefinition: "test dictionary definition10",
+          newDefinition: "test user definition10",
+        },
+        {
+          word: "testword11",
+          dictDefinition: "test dictionary definition11",
+          newDefinition: "test user definition11",
+        },
+        {
+          word: "testword12",
+          dictDefinition: "test dictionary definition12",
+          newDefinition: "test user definition12",
+        },
+      ],
     });
   }
 

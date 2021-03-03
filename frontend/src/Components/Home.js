@@ -29,7 +29,7 @@ const Home = () => {
     }
   }, [errors]);
 
-  useEffect(getEntriesOffline, []);
+  useEffect(getEntries, []);
 
   const renderSpinner = () => {
     return (
