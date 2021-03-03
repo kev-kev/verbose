@@ -4,6 +4,8 @@ import { Modal, Button, Form } from "react-bootstrap";
 
 const EditModal = (props) => {
   const { editModalIsOpen, setEditModal } = useContext(GlobalContext);
+  // const [entryUserDefinition, setEntryUserDefinition] = useState();
+
   const handleClose = () => {
     setEditModal(false);
   };
@@ -18,7 +20,7 @@ const EditModal = (props) => {
         {props.entry.dictDefinition} <hr />
         Your Definition: <br />
         {props.entry.newDefinition}
-        </Modal.Body>
+      </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={handleClose}>
           Close

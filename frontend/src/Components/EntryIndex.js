@@ -15,7 +15,7 @@ const EntryIndex = () => {
 
   const onEditClick = (entry) => {
     setSelectedEntry(entry);
-    setEditModal(true)
+    setEditModal(true);
   };
 
   const renderEntryCards = (entries) => {
@@ -60,7 +60,9 @@ const EntryIndex = () => {
 
   return (
     <>
-      <EditModal show={editModalIsOpen} entry={selectedEntry}/>
+      {editModalIsOpen ? (
+        <EditModal show={editModalIsOpen} entry={selectedEntry} />
+      ) : null}
       <Accordion className="mx-3" style={{ width: 500 }}>
         {renderEntryCards(entries)}
       </Accordion>

@@ -128,8 +128,8 @@ export default (state, action) => {
     case "SET_EDIT_MODAL":
       return {
         ...state,
-        editModalIsOpen: action.payload
-      }
+        editModalIsOpen: action.payload,
+      };
     default:
       return state;
   }
