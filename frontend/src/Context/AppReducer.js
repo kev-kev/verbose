@@ -40,11 +40,6 @@ export default (state, action) => {
         },
         isFetchingEntries: false,
       };
-    case "SET_CURRENT_WORD":
-      return {
-        ...state,
-        currentWord: action.payload,
-      };
     case "FETCHING_DEFINITIONS":
       return {
         ...state,
@@ -117,12 +112,6 @@ export default (state, action) => {
           ...state.errors,
           addWord: `${action.payload} has already been added.`,
         },
-      };
-    case "CLEAR_CURRENT_WORD":
-      return {
-        ...state,
-        dictionaryDefinitions: [],
-        currentWord: null,
       };
     case "CLEAR_ERRORS":
       return {

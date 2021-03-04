@@ -11,6 +11,7 @@ const Home = () => {
     isSubmittingEntry,
     dictionaryDefinitions,
     isFetchingDefinitions,
+    isFetchingEntries,
     errors,
     clearErrors,
     getEntries,
@@ -31,6 +32,9 @@ const Home = () => {
 
   useEffect(getEntries, []);
 
+  const [currentWord, setCurrentWord] = useState(null);
+
+
   const renderSpinner = () => {
     return (
       <Spinner animation="border" role="status">
@@ -41,9 +45,9 @@ const Home = () => {
 
   const renderForm = () => {
     if (dictionaryDefinitions && dictionaryDefinitions.length > 0) {
-      return <EntryForm />;
+      return <EntryForm currentWord={currentWord} />;
     } else {
-      return <NewWordForm />;
+      return <NewWordForm currentWord={currentWord} setCurrentWord={setCurrentWord}/>;
     }
   };
 
@@ -53,7 +57,7 @@ const Home = () => {
   };
 
   return (
-    <div className="d-flex flex-column min-vh-100 align-items-center">
+    <div className="mb-5 d-flex flex-column min-vh-100 align-items-center" >
       <Alert
         className="mt-3"
         variant="danger"
@@ -65,10 +69,10 @@ const Home = () => {
       </Alert>
       <img style={{ marginTop: "20vh" }} src={Logo} width="75px" height="auto" />
       <h3 className="mb-3">verbose</h3>
-      {isFetchingDefinitions || isSubmittingEntry
+      {renderForm()}
+      {isFetchingDefinitions || isSubmittingEntry || isFetchingEntries
         ? renderSpinner()
-        : renderForm()}
-      <EntryIndex />
+        : <EntryIndex />}
     </div>
   );
 };

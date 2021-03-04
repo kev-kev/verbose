@@ -1,15 +1,22 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { GlobalContext } from "../Context/GlobalContext";
 import { Pagination } from "react-bootstrap";
 
-const DefinitionSelector = (props) => {
+const DefinitionSelector = ({ setDictDefinition }) => {
   const { dictionaryDefinitions } = useContext(GlobalContext);
   const [activeNumber, setActiveNumber] = useState(0);
 
   const handleOnClick = (i) => {
     setActiveNumber(i);
-    props.setDictDefinition(dictionaryDefinitions[i].definition);
+    setDictDefinition(dictionaryDefinitions[i].definition);
   };
+
+  useEffect(() => {
+    function setFirstDefinition() {
+      setDictDefinition(dictionaryDefinitions[0].definition);
+    }
+    setFirstDefinition();
+  }, [dictionaryDefinitions, setDictDefinition]);
 
   let items = [];
   for (let number = 0; number < dictionaryDefinitions.length; number++) {
@@ -29,10 +36,7 @@ const DefinitionSelector = (props) => {
   return (
     <>
       <p>{dictionaryDefinitions[activeNumber].definition}</p>
-      <Pagination>
-        {items}
-        {console.log(activeNumber)}
-      </Pagination>
+      <Pagination>{items}</Pagination>
     </>
   );
 };

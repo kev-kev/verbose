@@ -4,12 +4,10 @@ import Owlbot from "owlbot-js";
 
 const initialState = {
   entries: [],
-  currentWord: null,
-  userDefinition: null,
+  dictionaryDefinitions: [],
   isFetchingEntries: false,
   isSubmittingEntry: false,
   isFetchingDefinitions: false,
-  dictionaryDefinitions: [],
   errors: {
     submit: null,
     fetchDefinitions: null,
@@ -155,12 +153,6 @@ const GlobalProvider = ({ children }) => {
       });
   }
 
-  function clearCurrentWord() {
-    dispatch({
-      type: "CLEAR_CURRENT_WORD",
-    });
-  }
-
   function addWordFailure(word) {
     dispatch({
       type: "ADD_WORD_FAILURE",
@@ -179,20 +171,17 @@ const GlobalProvider = ({ children }) => {
       value={{
         entries: state.entries,
         dictionaryDefinitions: state.dictionaryDefinitions,
-        isFetchingEntries: state.isFetchingEntries,
-        isSubmittingEntry: state.isSubmittingEntry,
-        isFetchingDefinitions: state.isFetchingDefinitions,
-        errors: state.errors,
         createEntry,
         clearErrors,
         getDictionaryDefinitions,
-        currentWord: state.currentWord,
-        clearCurrentWord,
-        userDefinition: state.userDefinition,
         getEntries,
         addWordFailure,
         deleteEntry,
         editEntry,
+        isFetchingEntries: state.isFetchingEntries,
+        isSubmittingEntry: state.isSubmittingEntry,
+        isFetchingDefinitions: state.isFetchingDefinitions,
+        errors: state.errors,
       }}
     >
       {children}
