@@ -24,7 +24,7 @@ const NewWordForm = () => {
   };
 
   return (
-    <Form id="newWordForm" inline className="mb-4">
+    <Form id="newWordForm" inline className="mb-5" >
       <Form.Control
         type="text"
         placeholder="Enter a word"

@@ -21,7 +21,6 @@ const EntryIndex = () => {
   const renderEntryCards = (entries) => {
     if (entries) {
       let i = 0;
-      console.log(entries)
       return entries.map((entry) => {
         i++;
         return (
@@ -61,9 +60,9 @@ const EntryIndex = () => {
 
   return (
     <>
-      {editModalIsOpen ? (
+      {editModalIsOpen && (
         <EditModal show={editModalIsOpen} entry={selectedEntry} />
-      ) : null}
+      )}
       <Accordion className="mx-3" style={{ width: 500 }}>
         {renderEntryCards(entries)}
       </Accordion>

@@ -3,7 +3,9 @@ import { GlobalContext } from "../Context/GlobalContext";
 import { Modal, Button, Form } from "react-bootstrap";
 
 const EditModal = (props) => {
-  const { editModalIsOpen, setEditModal, editEntry } = useContext(GlobalContext);
+  const { editModalIsOpen, setEditModal, editEntry } = useContext(
+    GlobalContext
+  );
   const [entryUserDefinition, setEntryUserDefinition] = useState();
 
   const handleClose = () => {
@@ -11,13 +13,13 @@ const EditModal = (props) => {
   };
 
   const handleSave = () => {
-    editEntry(props.entry, entryUserDefinition)
+    editEntry(props.entry, entryUserDefinition);
     setEditModal(false);
-  }
+  };
 
   return (
     <Modal show={editModalIsOpen} onHide={handleClose} className="mt-5">
-      <Form>  
+      <Form>
         <Modal.Header closeButton>
           <Modal.Title>{props.entry.word}</Modal.Title>
         </Modal.Header>
@@ -25,8 +27,12 @@ const EditModal = (props) => {
           Dictionary Definition: <br />
           {props.entry.dictDefinition} <hr />
           Your Definition: <br />
-          <Form.Control as="textarea" rows={3} defaultValue={props.entry.newDefinition} onChange={e => setEntryUserDefinition(e.target.value)}/>
-          
+          <Form.Control
+            as="textarea"
+            rows={3}
+            defaultValue={props.entry.newDefinition}
+            onChange={(e) => setEntryUserDefinition(e.target.value)}
+          />
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>

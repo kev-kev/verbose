@@ -68,7 +68,7 @@ app.post("/api/create", (req, res) => {
 app.put("/api/:word", (req, res) => {
   (async () => {
     try {
-      await db.collection("entries").doc(req.params.word).set(req.body)
+      await db.collection("entries").doc(req.params.word).set(req.body);
       getIndex(res);
     } catch (error) {
       console.log(error);

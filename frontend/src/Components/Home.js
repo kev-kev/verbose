@@ -63,7 +63,7 @@ const Home = () => {
       >
         <p>Something went wrong!</p>
       </Alert>
-      <img style={{ marginTop: "20%" }} src={Logo} width="75px" height="auto" />
+      <img style={{ marginTop: "20vh" }} src={Logo} width="75px" height="auto" />
       <h3 className="mb-3">verbose</h3>
       {isFetchingDefinitions || isSubmittingEntry
         ? renderSpinner()
