@@ -1,24 +1,24 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, } from "react";
 import { GlobalContext } from "../Context/GlobalContext";
 import { Modal, Button, Form } from "react-bootstrap";
 
 const EditModal = (props) => {
-  const { editModalIsOpen, setEditModal, editEntry } = useContext(
+  const { editEntry } = useContext(
     GlobalContext
   );
   const [entryUserDefinition, setEntryUserDefinition] = useState();
 
   const handleClose = () => {
-    setEditModal(false);
+    props.setEditModalIsOpen(false);
   };
 
   const handleSave = () => {
     editEntry(props.entry, entryUserDefinition);
-    setEditModal(false);
+    props.setEditModalIsOpen(false);
   };
 
   return (
-    <Modal show={editModalIsOpen} onHide={handleClose} className="mt-5">
+    <Modal show={props.editModalIsOpen} onHide={handleClose} className="mt-5">
       <Form>
         <Modal.Header closeButton>
           <Modal.Title>{props.entry.word}</Modal.Title>

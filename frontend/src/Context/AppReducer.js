@@ -71,11 +71,6 @@ export default (state, action) => {
         ...state,
         dictionaryDefinitions: null,
       };
-    case "SET_EDIT_MODAL":
-      return {
-        ...state,
-        editModalIsOpen: action.payload,
-      };
     case "ENTRY_UPDATE_SUCCESS":
       return {
         ...state,
