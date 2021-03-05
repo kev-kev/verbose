@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { GlobalContext } from "../Context/GlobalContext";
-import { Button, Form } from "react-bootstrap";
 import DefinitionSelector from "./DefinitionSelector";
+import { Button, Form } from "react-bootstrap";
 
 const EntryForm = ({ currentWord, setCurrentWord, dictionaryDefinitions }) => {
   const { createEntry, clearDefinitions } = useContext(GlobalContext);

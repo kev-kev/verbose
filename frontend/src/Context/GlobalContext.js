@@ -139,6 +139,7 @@ const GlobalProvider = ({ children }) => {
       .define(word)
       .then((data) => {
         console.log("success");
+        console.log(data);
         dispatch({
           type: "FETCH_DEFINITIONS_SUCCESS",
           payload: data.definitions,
@@ -168,7 +169,7 @@ const GlobalProvider = ({ children }) => {
 
   function clearDefinitions() {
     dispatch({
-      type: "CLEAR_DEFINITIONS"
+      type: "CLEAR_DEFINITIONS",
     });
   }
 

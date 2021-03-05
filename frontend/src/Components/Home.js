@@ -1,9 +1,9 @@
+import React, { useContext, useState, useEffect } from "react";
+import { GlobalContext } from "../Context/GlobalContext";
 import NewWordForm from "./NewWordForm";
 import EntryForm from "./EntryForm";
 import EntryIndex from "./EntryIndex";
 import Logo from "../Assets/logo.png";
-import { GlobalContext } from "../Context/GlobalContext";
-import React, { useContext, useState, useEffect } from "react";
 import { Spinner, Alert } from "react-bootstrap";
 
 const Home = () => {
@@ -79,7 +79,7 @@ const Home = () => {
   return (
     <div className="mb-5 d-flex flex-column min-vh-100 align-items-center">
       <Alert
-        className="mt-3"
+        className="mt-3 mb-n5"
         variant="danger"
         show={show}
         onClose={handleClose}

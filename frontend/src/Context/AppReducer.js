@@ -72,13 +72,13 @@ export default (state, action) => {
         entries: action.payload,
       };
     case "ENTRY_UPDATE_FAILURE":
-    return {
-      ...state,
-      errors: {
-        ...state.errors,
-        editWord: action.payload
-      },
-    };
+      return {
+        ...state,
+        errors: {
+          ...state.errors,
+          editWord: action.payload,
+        },
+      };
     case "STARRED_UPDATE_SUCCESS":
       return {
         ...state,
@@ -120,7 +120,7 @@ export default (state, action) => {
           fetchDefinitions: null,
           submit: null,
           entryIndex: null,
-          editWord: null
+          editWord: null,
         },
       };
 

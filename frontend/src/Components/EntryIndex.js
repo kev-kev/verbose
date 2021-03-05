@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { GlobalContext } from "../Context/GlobalContext";
-import { Accordion, Card, Button } from "react-bootstrap";
 import EditModal from "./EditModal";
+import { Accordion, Card, Button } from "react-bootstrap";
 
 const EntryIndex = ({ entries }) => {
   const { deleteEntry } = useContext(GlobalContext);

@@ -33,6 +33,7 @@ const DefinitionSelector = ({ setDictDefinition, dictionaryDefinitions }) => {
 
   return (
     <>
+      <p className="mt-n3 font-weight-light font-italic" >({dictionaryDefinitions[activeNumber].type})</p>
       <p>{dictionaryDefinitions[activeNumber].definition}</p>
       {dictionaryDefinitions.length > 1 && <Pagination>{items}</Pagination>}
     </>
