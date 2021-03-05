@@ -34,7 +34,6 @@ const Home = () => {
 
   const [currentWord, setCurrentWord] = useState(null);
 
-
   const renderSpinner = () => {
     return (
       <Spinner animation="border" role="status">
@@ -45,9 +44,20 @@ const Home = () => {
 
   const renderForm = () => {
     if (dictionaryDefinitions && dictionaryDefinitions.length > 0) {
-      return <EntryForm currentWord={currentWord} setCurrentWord={setCurrentWord} />;
+      return (
+        <EntryForm
+          currentWord={currentWord}
+          setCurrentWord={setCurrentWord}
+          dictionaryDefinitions={dictionaryDefinitions}
+        />
+      );
     } else {
-      return <NewWordForm currentWord={currentWord} setCurrentWord={setCurrentWord} />;
+      return (
+        <NewWordForm
+          currentWord={currentWord}
+          setCurrentWord={setCurrentWord}
+        />
+      );
     }
   };
 
@@ -57,14 +67,15 @@ const Home = () => {
   };
 
   const renderLoadingOrIndex = () => {
-    return (isFetchingDefinitions || isSubmittingEntry || isFetchingEntries
-        ? renderSpinner()
-        : <EntryIndex />
-    )
-  }
+    return isFetchingDefinitions || isSubmittingEntry || isFetchingEntries ? (
+      renderSpinner()
+    ) : (
+      <EntryIndex />
+    );
+  };
 
   return (
-    <div className="mb-5 d-flex flex-column min-vh-100 align-items-center" >
+    <div className="mb-5 d-flex flex-column min-vh-100 align-items-center">
       <Alert
         className="mt-3"
         variant="danger"
@@ -74,7 +85,12 @@ const Home = () => {
       >
         <p>Something went wrong!</p>
       </Alert>
-      <img style={{ marginTop: "20vh" }} src={Logo} width="75px" height="auto" />
+      <img
+        style={{ marginTop: "20vh" }}
+        src={Logo}
+        width="75px"
+        height="auto"
+      />
       <h3 className="mb-3">verbose</h3>
       {renderForm()}
       {renderLoadingOrIndex()}

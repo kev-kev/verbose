@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { GlobalContext } from "../Context/GlobalContext";
 import { Button, Form } from "react-bootstrap";
 
-const NewWordForm = (props) => {
+const NewWordForm = ({ currentWord, setCurrentWord }) => {
   const { getDictionaryDefinitions, entries, addWordFailure } = useContext(
     GlobalContext
   );
@@ -11,14 +11,14 @@ const NewWordForm = (props) => {
     let i = false;
     e.preventDefault();
     entries.map((entry) => {
-      if (entry.word === props.currentWord) {
+      if (entry.word === currentWord) {
         i = true;
       }
     });
     if (i === true) {
-      return addWordFailure(props.currentWord);
+      return addWordFailure(currentWord);
     } else {
-      return getDictionaryDefinitions(props.currentWord);
+      return getDictionaryDefinitions(currentWord);
     }
   };
 
@@ -28,7 +28,7 @@ const NewWordForm = (props) => {
         type="text"
         placeholder="Enter a word"
         className="mr-2"
-        onChange={(e) => props.setCurrentWord(e.target.value)}
+        onChange={(e) => setCurrentWord(e.target.value)}
       />
       <Button variant="primary" type="submit" onClick={handleSubmit}>
         Submit

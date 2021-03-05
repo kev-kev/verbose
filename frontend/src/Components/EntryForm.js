@@ -3,33 +3,32 @@ import { GlobalContext } from "../Context/GlobalContext";
 import { Button, Form } from "react-bootstrap";
 import DefinitionSelector from "./DefinitionSelector";
 
-const EntryForm = (props) => {
-  const {
-    createEntry,
-    dictionaryDefinitions,
-    clearDefinitions
-  } = useContext(GlobalContext);
+const EntryForm = ({ currentWord, setCurrentWord, dictionaryDefinitions }) => {
+  const { createEntry, clearDefinitions } = useContext(GlobalContext);
 
   const [userDefinition, setUserDefinition] = useState(null);
   const [dictDefinition, setDictDefinition] = useState(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    createEntry(props.currentWord, userDefinition, dictDefinition);
+    createEntry(currentWord, userDefinition, dictDefinition);
   };
 
   const handleBack = (e) => {
     e.preventDefault();
     clearDefinitions();
-    props.setCurrentWord(null);
+    setCurrentWord(null);
   };
 
   return (
     <Form id="entryForm" className="mw-50 mb-5">
-      <Form.Label>{props.currentWord}</Form.Label>
+      <Form.Label>{currentWord}</Form.Label>
       <Form.Text>
         {dictionaryDefinitions[0] && (
-          <DefinitionSelector setDictDefinition={setDictDefinition} />
+          <DefinitionSelector
+            setDictDefinition={setDictDefinition}
+            dictionaryDefinitions={dictionaryDefinitions}
+          />
         )}
       </Form.Text>
       <Form.Control
