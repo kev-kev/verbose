@@ -45,9 +45,9 @@ const Home = () => {
 
   const renderForm = () => {
     if (dictionaryDefinitions && dictionaryDefinitions.length > 0) {
-      return <EntryForm currentWord={currentWord} />;
+      return <EntryForm currentWord={currentWord} setCurrentWord={setCurrentWord} />;
     } else {
-      return <NewWordForm currentWord={currentWord} setCurrentWord={setCurrentWord}/>;
+      return <NewWordForm currentWord={currentWord} setCurrentWord={setCurrentWord} />;
     }
   };
 
@@ -55,6 +55,13 @@ const Home = () => {
     setShow(false);
     clearErrors();
   };
+
+  const renderLoadingOrIndex = () => {
+    return (isFetchingDefinitions || isSubmittingEntry || isFetchingEntries
+        ? renderSpinner()
+        : <EntryIndex />
+    )
+  }
 
   return (
     <div className="mb-5 d-flex flex-column min-vh-100 align-items-center" >
@@ -70,9 +77,7 @@ const Home = () => {
       <img style={{ marginTop: "20vh" }} src={Logo} width="75px" height="auto" />
       <h3 className="mb-3">verbose</h3>
       {renderForm()}
-      {isFetchingDefinitions || isSubmittingEntry || isFetchingEntries
-        ? renderSpinner()
-        : <EntryIndex />}
+      {renderLoadingOrIndex()}
     </div>
   );
 };

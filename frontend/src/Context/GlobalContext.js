@@ -166,6 +166,12 @@ const GlobalProvider = ({ children }) => {
     });
   }
 
+  function clearDefinitions() {
+    dispatch({
+      type: "CLEAR_DEFINITIONS"
+    });
+  }
+
   return (
     <GlobalContext.Provider
       value={{
@@ -174,6 +180,7 @@ const GlobalProvider = ({ children }) => {
         createEntry,
         clearErrors,
         getDictionaryDefinitions,
+        clearDefinitions,
         getEntries,
         addWordFailure,
         deleteEntry,

@@ -7,6 +7,7 @@ const EntryForm = (props) => {
   const {
     createEntry,
     dictionaryDefinitions,
+    clearDefinitions
   } = useContext(GlobalContext);
 
   const [userDefinition, setUserDefinition] = useState(null);
@@ -19,11 +20,12 @@ const EntryForm = (props) => {
 
   const handleBack = (e) => {
     e.preventDefault();
+    clearDefinitions();
     props.setCurrentWord(null);
   };
 
   return (
-    <Form id="entryForm" className="w-75 mb-5">
+    <Form id="entryForm" className="mw-50 mb-5">
       <Form.Label>{props.currentWord}</Form.Label>
       <Form.Text>
         {dictionaryDefinitions[0] && (

@@ -36,7 +36,9 @@ const DefinitionSelector = ({ setDictDefinition }) => {
   return (
     <>
       <p>{dictionaryDefinitions[activeNumber].definition}</p>
-      <Pagination>{items}</Pagination>
+      {dictionaryDefinitions.length > 1 && (
+        <Pagination>{items}</Pagination>
+      )}
     </>
   );
 };
