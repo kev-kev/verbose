@@ -1,11 +1,9 @@
-import React, { useContext, useState, } from "react";
+import React, { useContext, useState } from "react";
 import { GlobalContext } from "../Context/GlobalContext";
 import { Modal, Button, Form } from "react-bootstrap";
 
-const EditModal = ({entry, editModalIsOpen, setEditModalIsOpen }) => {
-  const { editEntry } = useContext(
-    GlobalContext
-  );
+const EditModal = ({ entry, editModalIsOpen, setEditModalIsOpen }) => {
+  const { editEntry } = useContext(GlobalContext);
   const [entryUserDefinition, setEntryUserDefinition] = useState();
 
   const handleClose = () => {

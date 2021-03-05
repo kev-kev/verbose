@@ -1,5 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
-import { GlobalContext } from "../Context/GlobalContext";
+import React, { useState, useEffect } from "react";
 import { Pagination } from "react-bootstrap";
 
 const DefinitionSelector = ({ setDictDefinition, dictionaryDefinitions }) => {

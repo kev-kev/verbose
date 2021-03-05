@@ -15,6 +15,7 @@ const Home = () => {
     errors,
     clearErrors,
     getEntries,
+    entries,
   } = useContext(GlobalContext);
 
   const [show, setShow] = useState(false);
@@ -56,6 +57,7 @@ const Home = () => {
         <NewWordForm
           currentWord={currentWord}
           setCurrentWord={setCurrentWord}
+          entries={entries}
         />
       );
     }
@@ -70,7 +72,7 @@ const Home = () => {
     return isFetchingDefinitions || isSubmittingEntry || isFetchingEntries ? (
       renderSpinner()
     ) : (
-      <EntryIndex />
+      <EntryIndex entries={entries} />
     );
   };
 

@@ -1,12 +1,10 @@
 import React, { useContext, useState } from "react";
 import { GlobalContext } from "../Context/GlobalContext";
-import { Accordion, Card, Button, Modal } from "react-bootstrap";
+import { Accordion, Card, Button } from "react-bootstrap";
 import EditModal from "./EditModal";
 
-const EntryIndex = () => {
-  const { entries, deleteEntry, } = useContext(
-    GlobalContext
-  );
+const EntryIndex = ({ entries }) => {
+  const { deleteEntry } = useContext(GlobalContext);
   const [selectedEntry, setSelectedEntry] = useState();
   const [editModalIsOpen, setEditModalIsOpen] = useState(false);
 
@@ -62,7 +60,11 @@ const EntryIndex = () => {
   return (
     <>
       {editModalIsOpen && (
-        <EditModal editModalIsOpen={editModalIsOpen} setEditModalIsOpen={setEditModalIsOpen} entry={selectedEntry} />
+        <EditModal
+          editModalIsOpen={editModalIsOpen}
+          setEditModalIsOpen={setEditModalIsOpen}
+          entry={selectedEntry}
+        />
       )}
       <Accordion className="mx-3" style={{ width: 500 }}>
         {renderEntryCards(entries)}

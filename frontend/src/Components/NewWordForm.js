@@ -1,9 +1,9 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { GlobalContext } from "../Context/GlobalContext";
 import { Button, Form } from "react-bootstrap";
 
-const NewWordForm = ({ currentWord, setCurrentWord }) => {
-  const { getDictionaryDefinitions, entries, addWordFailure } = useContext(
+const NewWordForm = ({ currentWord, setCurrentWord, entries }) => {
+  const { getDictionaryDefinitions, addWordFailure } = useContext(
     GlobalContext
   );
 
@@ -23,7 +23,7 @@ const NewWordForm = ({ currentWord, setCurrentWord }) => {
   };
 
   return (
-    <Form id="newWordForm" inline className="mb-5" >
+    <Form id="newWordForm" inline className="mb-5">
       <Form.Control
         type="text"
         placeholder="Enter a word"
