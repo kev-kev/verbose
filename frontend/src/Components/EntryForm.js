@@ -21,8 +21,8 @@ const EntryForm = ({ currentWord, setCurrentWord, dictionaryDefinitions }) => {
   };
 
   return (
-    <Form id="entryForm" className="mw-50 mb-5">
-      <Form.Label>{currentWord}</Form.Label>
+    <Form id="entryForm" className="w-75 mb-4 mt-2" >
+      <Form.Label as="h5" className="mb-1" >{currentWord} </Form.Label> 
       <Form.Text>
         {dictionaryDefinitions[0] && (
           <DefinitionSelector

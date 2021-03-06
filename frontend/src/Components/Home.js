@@ -79,7 +79,7 @@ const Home = () => {
   return (
     <div className="mb-5 d-flex flex-column min-vh-100 align-items-center">
       <Alert
-        className="mt-3 mb-n5"
+        className="mt-5 position-absolute"
         variant="danger"
         show={show}
         onClose={handleClose}
@@ -92,6 +92,7 @@ const Home = () => {
         src={Logo}
         width="75px"
         height="auto"
+        alt="logo "
       />
       <h3 className="mb-3">verbose</h3>
       {renderForm()}

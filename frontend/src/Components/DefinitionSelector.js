@@ -33,8 +33,8 @@ const DefinitionSelector = ({ setDictDefinition, dictionaryDefinitions }) => {
 
   return (
     <>
-      <p className="mt-n3 font-weight-light font-italic" >({dictionaryDefinitions[activeNumber].type})</p>
-      <p>{dictionaryDefinitions[activeNumber].definition}</p>
+      <p className="mt-n2 font-weight-light font-italic" >({dictionaryDefinitions[activeNumber].type})</p>
+      <h6 className="font-weight-normal mt-n3">{dictionaryDefinitions[activeNumber].definition}</h6>
       {dictionaryDefinitions.length > 1 && <Pagination>{items}</Pagination>}
     </>
   );

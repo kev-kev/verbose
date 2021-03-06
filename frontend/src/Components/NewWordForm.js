@@ -23,7 +23,7 @@ const NewWordForm = ({ currentWord, setCurrentWord, entries }) => {
   };
 
   return (
-    <Form id="newWordForm" inline className="mb-5">
+    <Form id="newWordForm" inline className="mb-4">
       <Form.Control
         type="text"
         placeholder="Enter a word"
