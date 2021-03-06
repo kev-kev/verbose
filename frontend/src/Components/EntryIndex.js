@@ -22,7 +22,7 @@ const EntryIndex = ({ entries }) => {
     if (abvArr.includes(type)) {
       return `(${type.slice(0, 3)})`
     } else {
-      return `(${type.charAt(0)})`
+      return `(${type})`
     }
   }
 
@@ -37,11 +37,14 @@ const EntryIndex = ({ entries }) => {
               as={Card.Header}
               eventKey={i}
             >
-              {entry.word}{entry.type && getTypeAbv(entry.type)} - {entry.newDefinition}
+              {entry.word} - {entry.newDefinition}
             </Accordion.Toggle>
             <Accordion.Collapse eventKey={i}>
               <Card.Body>
-                <Card.Text>{entry.dictDefinition}</Card.Text>
+                <Card.Text className="mt-n3">
+                  <span className="font-italic" style={{fontSize: "small"}}>{entry.type && getTypeAbv(entry.type)}</span> <br />
+                  {entry.dictDefinition}
+                </Card.Text>
                 <Button
                   onClick={() => onEditClick(entry)}
                   variant="primary"

@@ -115,6 +115,7 @@ const GlobalProvider = ({ children }) => {
         word: entry.word,
         newDefinition: value,
         dictDefinition: entry.dictDefinition,
+        type: entry.type
       }),
     })
       .then((r) => r.json())
