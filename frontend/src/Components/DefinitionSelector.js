@@ -1,20 +1,22 @@
 import React, { useState, useEffect } from "react";
 import { Pagination } from "react-bootstrap";
 
-const DefinitionSelector = ({ setDictDefinition, dictionaryDefinitions }) => {
+const DefinitionSelector = ({ setDictDefinition, dictionaryDefinitions, setType }) => {
   const [activeNumber, setActiveNumber] = useState(0);
 
   const handleOnClick = (i) => {
     setActiveNumber(i);
     setDictDefinition(dictionaryDefinitions[i].definition);
+    setType(dictionaryDefinitions[i].type)
   };
 
   useEffect(() => {
     function setFirstDefinition() {
       setDictDefinition(dictionaryDefinitions[0].definition);
+      setType(dictionaryDefinitions[0].type)
     }
     setFirstDefinition();
-  }, [dictionaryDefinitions, setDictDefinition]);
+  }, [dictionaryDefinitions, setDictDefinition, setType]);
 
   let items = [];
   for (let number = 0; number < dictionaryDefinitions.length; number++) {

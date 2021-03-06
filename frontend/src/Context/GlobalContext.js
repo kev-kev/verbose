@@ -49,7 +49,7 @@ const GlobalProvider = ({ children }) => {
       });
   }
 
-  function createEntry(word, newDefinition, dictDefinition) {
+  function createEntry(word, newDefinition, dictDefinition, type) {
     dispatch({ type: "SUBMITTING_ENTRY" });
     // add .json to the end of the url if using realtime db rather than firestore4
     fetch(process.env.REACT_APP_DB_URL + "/api/create", {
@@ -59,8 +59,9 @@ const GlobalProvider = ({ children }) => {
       },
       body: JSON.stringify({
         word,
-        dictDefinition,
         newDefinition,
+        dictDefinition,
+        type
       }),
     })
       .then(handleErrors)

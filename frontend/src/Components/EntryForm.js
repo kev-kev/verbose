@@ -8,10 +8,11 @@ const EntryForm = ({ currentWord, setCurrentWord, dictionaryDefinitions }) => {
 
   const [userDefinition, setUserDefinition] = useState(null);
   const [dictDefinition, setDictDefinition] = useState(null);
+  const [type, setType] = useState(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    createEntry(currentWord, userDefinition, dictDefinition);
+    createEntry(currentWord, userDefinition, dictDefinition, type);
   };
 
   const handleBack = (e) => {
@@ -21,13 +22,16 @@ const EntryForm = ({ currentWord, setCurrentWord, dictionaryDefinitions }) => {
   };
 
   return (
-    <Form id="entryForm" className="w-75 mb-4 mt-2" >
-      <Form.Label as="h5" className="mb-1" >{currentWord} </Form.Label> 
+    <Form id="entryForm" className="w-75 mb-4 mt-2">
+      <Form.Label as="h5" className="mb-1">
+        {currentWord}
+      </Form.Label>
       <Form.Text>
         {dictionaryDefinitions[0] && (
           <DefinitionSelector
             setDictDefinition={setDictDefinition}
             dictionaryDefinitions={dictionaryDefinitions}
+            setType={setType}
           />
         )}
       </Form.Text>

@@ -17,6 +17,15 @@ const EntryIndex = ({ entries }) => {
     setEditModalIsOpen(true);
   };
 
+  const getTypeAbv = (type) => {
+    const abvArr = ["adverb", "adjective", "pronoun", "preposition", "conjunction", "interjection"]
+    if (abvArr.includes(type)) {
+      return `(${type.slice(0, 3)})`
+    } else {
+      return `(${type.charAt(0)})`
+    }
+  }
+
   const renderEntryCards = (entries) => {
     if (entries) {
       let i = 0;
@@ -27,9 +36,8 @@ const EntryIndex = ({ entries }) => {
             <Accordion.Toggle
               as={Card.Header}
               eventKey={i}
-              className="d-flex justify-content-space-between"
             >
-              {entry.word} - {entry.newDefinition}
+              {entry.word}{entry.type && getTypeAbv(entry.type)} - {entry.newDefinition}
             </Accordion.Toggle>
             <Accordion.Collapse eventKey={i}>
               <Card.Body>
