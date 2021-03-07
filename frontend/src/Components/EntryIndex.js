@@ -1,31 +1,31 @@
 import React, { useState } from "react";
-import EditModal from "./EditModal";
+import EntryModal from "./EntryModal";
 import { Accordion, Card, Button } from "react-bootstrap";
-import DeleteModal from "./DeleteModal";
 
 const EntryIndex = ({ entries }) => {
   const [selectedEntry, setSelectedEntry] = useState();
-  const [editModalIsOpen, setEditModalIsOpen] = useState(false);
-  const [deleteModalIsOpen, setDeleteModalIsOpen] = useState(false);
+  const [modalForm, setModalForm] = useState();
 
-  const handleDeleteClick = (entry) => {
-    setSelectedEntry(entry); 
-    setDeleteModalIsOpen(true);
-  };
-
-  const handleEditClick = (entry) => {
+  const handleButtonClick = (entry, form) => {
     setSelectedEntry(entry);
-    setEditModalIsOpen(true);
+    setModalForm(form);
   };
 
   const getTypeAbbv = (type) => {
-    const abbvArr = ["adverb", "adjective", "pronoun", "preposition", "conjunction", "interjection"]
+    const abbvArr = [
+      "adverb",
+      "adjective",
+      "pronoun",
+      "preposition",
+      "conjunction",
+      "interjection",
+    ];
     if (abbvArr.includes(type)) {
-      return `(${type.slice(0, 3)})`
+      return `(${type.slice(0, 3)})`;
     } else {
-      return `(${type})`
+      return `(${type})`;
     }
-  }
+  };
 
   const renderEntryCards = (entries) => {
     if (entries) {
@@ -34,20 +34,20 @@ const EntryIndex = ({ entries }) => {
         i++;
         return (
           <Card key={i}>
-            <Accordion.Toggle
-              as={Card.Header}
-              eventKey={i}
-            >
+            <Accordion.Toggle as={Card.Header} eventKey={i}>
               {entry.word} - {entry.newDefinition}
             </Accordion.Toggle>
             <Accordion.Collapse eventKey={i}>
               <Card.Body>
                 <Card.Text className="mt-n3">
-                  <span className="font-italic" style={{fontSize: "small"}}>{entry.type && getTypeAbbv(entry.type)}</span> <br />
+                  <span className="font-italic" style={{ fontSize: "small" }}>
+                    {entry.type && getTypeAbbv(entry.type)}
+                  </span>{" "}
+                  <br />
                   {entry.dictDefinition}
                 </Card.Text>
                 <Button
-                  onClick={() => handleEditClick(entry)}
+                  onClick={() => handleButtonClick(entry, "edit")}
                   variant="primary"
                   className="mr-2"
                   size="sm"
@@ -55,7 +55,7 @@ const EntryIndex = ({ entries }) => {
                   Edit
                 </Button>
                 <Button
-                  onClick={() => handleDeleteClick(entry)}
+                  onClick={() => handleButtonClick(entry, "delete")}
                   variant="danger"
                   size="sm"
                 >
@@ -71,18 +71,11 @@ const EntryIndex = ({ entries }) => {
 
   return (
     <>
-      {editModalIsOpen && (
-        <EditModal
-          editModalIsOpen={editModalIsOpen}
-          setEditModalIsOpen={setEditModalIsOpen}
+      {modalForm && (
+        <EntryModal
           entry={selectedEntry}
-        />
-      )}
-      {deleteModalIsOpen && (
-        <DeleteModal 
-          deleteModalIsOpen={deleteModalIsOpen}
-          setDeleteModalIsOpen={setDeleteModalIsOpen}
-          entry={selectedEntry}
+          form={modalForm}
+          setForm={setModalForm}
         />
       )}
       <Accordion className="mx-3" style={{ width: 500 }}>
