@@ -84,8 +84,8 @@ const GlobalProvider = ({ children }) => {
       });
   }
 
-  function deleteEntry(word) {
-    fetch(process.env.REACT_APP_DB_URL + `/api/${word}`, {
+  function deleteEntry(entry) {
+    fetch(process.env.REACT_APP_DB_URL + `/api/${entry.word}`, {
       method: "DELETE",
     })
       .then(handleErrors)

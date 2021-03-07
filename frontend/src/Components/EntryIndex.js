@@ -1,25 +1,26 @@
-import React, { useContext, useState } from "react";
-import { GlobalContext } from "../Context/GlobalContext";
+import React, { useState } from "react";
 import EditModal from "./EditModal";
 import { Accordion, Card, Button } from "react-bootstrap";
+import DeleteModal from "./DeleteModal";
 
 const EntryIndex = ({ entries }) => {
-  const { deleteEntry } = useContext(GlobalContext);
   const [selectedEntry, setSelectedEntry] = useState();
   const [editModalIsOpen, setEditModalIsOpen] = useState(false);
+  const [deleteModalIsOpen, setDeleteModalIsOpen] = useState(false);
 
-  const handleDelete = (word) => {
-    deleteEntry(word);
+  const handleDeleteClick = (entry) => {
+    setSelectedEntry(entry); 
+    setDeleteModalIsOpen(true);
   };
 
-  const onEditClick = (entry) => {
+  const handleEditClick = (entry) => {
     setSelectedEntry(entry);
     setEditModalIsOpen(true);
   };
 
-  const getTypeAbv = (type) => {
-    const abvArr = ["adverb", "adjective", "pronoun", "preposition", "conjunction", "interjection"]
-    if (abvArr.includes(type)) {
+  const getTypeAbbv = (type) => {
+    const abbvArr = ["adverb", "adjective", "pronoun", "preposition", "conjunction", "interjection"]
+    if (abbvArr.includes(type)) {
       return `(${type.slice(0, 3)})`
     } else {
       return `(${type})`
@@ -42,11 +43,11 @@ const EntryIndex = ({ entries }) => {
             <Accordion.Collapse eventKey={i}>
               <Card.Body>
                 <Card.Text className="mt-n3">
-                  <span className="font-italic" style={{fontSize: "small"}}>{entry.type && getTypeAbv(entry.type)}</span> <br />
+                  <span className="font-italic" style={{fontSize: "small"}}>{entry.type && getTypeAbbv(entry.type)}</span> <br />
                   {entry.dictDefinition}
                 </Card.Text>
                 <Button
-                  onClick={() => onEditClick(entry)}
+                  onClick={() => handleEditClick(entry)}
                   variant="primary"
                   className="mr-2"
                   size="sm"
@@ -54,7 +55,7 @@ const EntryIndex = ({ entries }) => {
                   Edit
                 </Button>
                 <Button
-                  onClick={() => handleDelete(entry.word)}
+                  onClick={() => handleDeleteClick(entry)}
                   variant="danger"
                   size="sm"
                 >
@@ -74,6 +75,13 @@ const EntryIndex = ({ entries }) => {
         <EditModal
           editModalIsOpen={editModalIsOpen}
           setEditModalIsOpen={setEditModalIsOpen}
+          entry={selectedEntry}
+        />
+      )}
+      {deleteModalIsOpen && (
+        <DeleteModal 
+          deleteModalIsOpen={deleteModalIsOpen}
+          setDeleteModalIsOpen={setDeleteModalIsOpen}
           entry={selectedEntry}
         />
       )}
