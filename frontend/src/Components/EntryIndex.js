@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import EntryModal from "./EntryModal";
 import { Accordion, Card, Button } from "react-bootstrap";
 
-const EntryIndex = ({ entries }) => {
+const EntryIndex = ({ entries, }) => {
   const [selectedEntry, setSelectedEntry] = useState();
   const [modalForm, setModalForm] = useState();
 

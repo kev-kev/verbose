@@ -18,7 +18,7 @@ const Home = () => {
     entries,
   } = useContext(GlobalContext);
 
-  const [show, setShow] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
   useEffect(() => {
     if (
       errors.submit ||
@@ -27,7 +27,7 @@ const Home = () => {
       errors.addWord ||
       errors.editWord
     ) {
-      setShow(true);
+      setShowAlert(true);
     }
   }, [errors]);
 
@@ -64,7 +64,7 @@ const Home = () => {
   };
 
   const handleClose = () => {
-    setShow(false);
+    setShowAlert(false);
     clearErrors();
   };
 
@@ -76,12 +76,30 @@ const Home = () => {
     );
   };
 
+  const renderAlert = (variant, message) => {
+    // if (showAlert){
+      // ...
+    // }
+    return (
+      <Alert
+        className="mt-5 position-absolute"
+        variant={variant}
+        showAlert={showAlert}
+        onClose={handleClose}
+        dismissible
+      >
+        <p>{message}</p>
+      </Alert>
+    )
+  }
+
   return (
     <div className="mb-5 d-flex flex-column min-vh-100 align-items-center">
+      {/* {renderAlert(danger, "Something went wrong!")} */}
       <Alert
         className="mt-5 position-absolute"
         variant="danger"
-        show={show}
+        showAlert={showAlert}
         onClose={handleClose}
         dismissible
       >
