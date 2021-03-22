@@ -77,26 +77,25 @@ const Home = () => {
   };
 
   const renderAlert = (variant, message) => {
-    // if (showAlert){
-      // ...
-    // }
-    return (
-      <Alert
-        className="mt-5 position-absolute"
-        variant={variant}
-        showAlert={showAlert}
-        onClose={handleClose}
-        dismissible
-      >
-        <p>{message}</p>
-      </Alert>
-    )
+    if (showAlert){
+      return (
+        <Alert
+          className="mt-5 position-absolute"
+          variant={variant}
+          showAlert={showAlert}
+          onClose={handleClose}
+          dismissible
+        >
+          <p>{message}</p>
+        </Alert>
+      )
+    }
   }
 
   return (
     <div className="mb-5 d-flex flex-column min-vh-100 align-items-center">
-      {/* {renderAlert(danger, "Something went wrong!")} */}
-      <Alert
+      {renderAlert("danger", "Something went wrong!")}
+      {/* <Alert
         className="mt-5 position-absolute"
         variant="danger"
         showAlert={showAlert}
@@ -104,7 +103,7 @@ const Home = () => {
         dismissible
       >
         <p>Something went wrong!</p>
-      </Alert>
+      </Alert> */}
       <img
         style={{ marginTop: "20vh" }}
         src={Logo}
